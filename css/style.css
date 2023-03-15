@@ -7,7 +7,11 @@ font-family: 'Times New Roman', Times, serif;
 font-size: 55px;
 text-align: center;
 color:rgb(122, 5, 5);
+border: 2px solid rgb(45, 2, 2);
+border-radius:35px;
+
 }
+
 p {
     font-size: 40px;
     font-weight: 500;
@@ -26,11 +30,15 @@ p {
 
 
 .results {
-    grid-column: 2/8;
-    grid-row: 4/5;
+    /* grid-column: 2/8;
+    grid-row: 4/5; */
     background-color: rgb(201, 201, 179);
     border: 2px solid rgb(45, 2, 2);
     border-radius: 5px;
+    height:fit-content;
+    width: fit-content;
+    padding-right: 20px;
+   
 }
 
 button {
@@ -43,6 +51,7 @@ button {
     color: brown;
     font-weight: 800;
     margin:10px;
+    margin-left: 75px;
    
   }
   
@@ -54,16 +63,18 @@ button {
   }
 
   .list-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: flex; 
+    flex-direction: column; 
+    justify-content:right;
     align-items: center;
   }
 
   ul {
     color: #7b0909;
-    width: max-content;
     margin: auto;
+    justify-content: right;
+  
+ 
   }
   
   li {
