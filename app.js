@@ -19,6 +19,12 @@ let productThree= document.getElementById ('img-three');
 let button = document.getElementById('button');
 let resultsList = document.getElementById('results-list');
 
+///// Chart JS Reference
+
+const ctx = document.getElementById ('my-chart')
+
+//// Constructor function 
+
 function Display(name, fileExtension = 'jpg') {
     this.name = name;
     this.views = 0;
@@ -61,15 +67,28 @@ function RandomImg(){
   // Render fucntion //
 
   function renderImg () {
-    let imgOne = RandomImg ();
-    let imgTwo = RandomImg ();
-    let imgThree = RandomImg ();
-////// COMPARE IMAGES -while- they are the same get a new randomIndex -OR- display image***************** */
-    while(imgOne === imgTwo || imgOne === imgThree ||imgTwo === imgThree){
-        imgTwo = RandomImg ();
-        imgThree = RandomImg ();
-    }
+//     let imgOne = RandomImg ();
+//     let imgTwo = RandomImg ();
+//     let imgThree = RandomImg ();
+// ////// COMPARE IMAGES -while- they are the same get a new randomIndex -OR- display image***************** */
+//     while(imgOne === imgTwo || imgOne === imgThree ||imgTwo === imgThree){
+//         imgTwo = RandomImg ();
+//         imgThree = RandomImg ();
+//     } Keeping this for my reference
 
+
+    let indexArray = [];
+      while (indexArray.length < 6){
+        let randomIndex = RandomImg ();
+        if (!indexArray.includes (randomIndex)){
+          indexArray.push (randomIndex);
+        }
+      }
+     
+      let imgOne = indexArray.shift ();
+      let imgTwo = indexArray.shift ();
+      let imgThree = indexArray.shift ();
+    
   productOne.src = state.array[imgOne].image;
   productOne.alt = state.array[imgOne].name;
   state.array[imgOne].views++;
@@ -81,7 +100,51 @@ function RandomImg(){
   productThree.src = state.array[imgThree].image;
   productThree.alt = state.array[imgThree].name;
   state.array[imgThree].views++;
-}
+};
+
+/// Function to Render Chart 
+
+function renderChart () {
+  ctx.style.display = 'block';
+  let prodNames = [];
+  let prodVotes = [];
+  let prodViews = [];
+
+  for (let i = 0; i < state.array.length; i++) {
+    prodNames.push (state.array [i].name);
+    prodVotes.push (state.array [i].votes);
+    prodViews.push (state.array [i].views);
+  }
+  
+  let myChart = {
+    type: 'bar',
+    data: {
+      labels: prodNames,
+      datasets: [{
+        label: '# of Views',
+        data: prodViews,
+        borderWidth: 2,
+        backgroundColor: ['Green'],
+      },
+      {
+        label: '# of Votes',
+        data: prodVotes,
+        borderWidth: 2,
+        backgroundColor: ['Maroon']
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
+
+    new Chart (ctx,myChart);
+  }
+
 
 // >>>>>>> EVENT HANDLERS
 function handleClick(event){
@@ -112,6 +175,8 @@ function handleShowResults(){
         liElem.textContent = `${state.array[i].name} had ${state.array[i].views} views and had ${state.array[i].votes} votes`;
         resultsList.append(liElem);
       }
+      button.style.display ='none';
+      renderChart ();
     }
   }
 

@@ -30,14 +30,14 @@ p {
 
 
 .results {
-    /* grid-column: 2/8;
-    grid-row: 4/5; */
     background-color: rgb(201, 201, 179);
     border: 2px solid rgb(45, 2, 2);
     border-radius: 5px;
     height:fit-content;
-    width: fit-content;
-    padding-right: 20px;
+    width: 600px;
+    display: flex;
+    margin-left: 380px;
+
    
 }
 
@@ -73,12 +73,16 @@ button {
     color: #7b0909;
     margin: auto;
     justify-content: right;
-  
- 
+    font-size: 18px;
+
   }
   
   li {
    line-height: 30px; 
+  }
+
+  canvas {
+    display: none;
   }
 
   
