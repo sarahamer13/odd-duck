@@ -4,6 +4,3 @@
 
 
 ![Getting Started](/img/Screenshot.png)
-
-
-
