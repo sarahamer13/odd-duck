@@ -74,13 +74,13 @@ function RandomImg(){
 //     while(imgOne === imgTwo || imgOne === imgThree ||imgTwo === imgThree){
 //         imgTwo = RandomImg ();
 //         imgThree = RandomImg ();
-//     } Keeping this for my reference
-
+//     } 
+    //Keeping this for my reference
 
     let indexArray = [];
       while (indexArray.length < 6){
         let randomIndex = RandomImg ();
-        if (!indexArray.includes (randomIndex)){
+        if (!indexArray.includes (randomIndex)){ 
           indexArray.push (randomIndex);
         }
       }
@@ -88,6 +88,8 @@ function RandomImg(){
       let imgOne = indexArray.shift ();
       let imgTwo = indexArray.shift ();
       let imgThree = indexArray.shift ();
+
+      console.log (indexArray);
     
   productOne.src = state.array[imgOne].image;
   productOne.alt = state.array[imgOne].name;
