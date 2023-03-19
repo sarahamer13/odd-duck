@@ -3,7 +3,7 @@
 ///// Globals//////
 
 let voteCount = 25;
-
+let indexArray = [];
 // for data that can change with our application state
 const state = {
     array: [],
@@ -34,6 +34,19 @@ function Display(name, fileExtension = 'jpg') {
     state.array.push(this);
 }
 
+ //Step 3 Get info from local storage 
+
+ let retrievedProds = localStorage.getItem ('myProducts');
+  // console.log ('RETRIEVED PRODS', retrievedProds);
+
+ // Step 4 convert data to original format 
+
+ let parsedProds = JSON.parse(retrievedProds);
+  // console.log ('PARSED ----- >', parsedProds);
+
+if (retrievedProds){
+  state.array = parsedProds;
+} else {
 let bag = new Display ('bag');
 let banana = new Display('banana');
 let bathroom = new Display('bathroom');
@@ -54,8 +67,9 @@ let unicorn = new Display('unicorn');
 let waterCan = new Display('water-can');
 let wineGlass = new Display ('wine-glass');
 
+}
 // proof of life
-console.log(state.array);
+// console.log(state.array);
 
 // >>>>>>> HELPER FUNCTIONS
 // Randomly generate an image
@@ -77,19 +91,21 @@ function RandomImg(){
 //     } 
     //Keeping this for my reference
 
-    let indexArray = [];
+
       while (indexArray.length < 6){
         let randomIndex = RandomImg ();
         if (!indexArray.includes (randomIndex)){ 
           indexArray.push (randomIndex);
+        } else { randomIndex = RandomImg();
         }
       }
-     
+     console.log (indexArray);
+
       let imgOne = indexArray.shift ();
       let imgTwo = indexArray.shift ();
       let imgThree = indexArray.shift ();
 
-      console.log (indexArray);
+      // console.log (indexArray);
     
   productOne.src = state.array[imgOne].image;
   productOne.alt = state.array[imgOne].name;
@@ -164,8 +180,15 @@ renderImg();
     // stop votes
   if(voteCount === 0){
     imgContainer.removeEventListener('click', handleClick);
-  }
+  
   console.log(voteCount);
+
+  // Step 1 - Convert our data to string to store in local storage
+    let stringifiedProds = JSON.stringify (state.array);
+    console.log (stringifiedProds);
+  /// Step 2 - Store / set item with key value pair
+    localStorage.setItem('myProducts', stringifiedProds);
+  }
 };
 
 function handleShowResults(){
